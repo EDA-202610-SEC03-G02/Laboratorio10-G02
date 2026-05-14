@@ -337,3 +337,11 @@ def partition(my_list, low_node, high_node, sort_crit):
     i["info"] = high_node["info"]
     high_node["info"] = temp
     return i
+
+def default_function(elemen_1, element_2):
+
+   if elemen_1 > element_2:
+      return 1
+   elif elemen_1 < element_2:
+      return -1
+   return 0
