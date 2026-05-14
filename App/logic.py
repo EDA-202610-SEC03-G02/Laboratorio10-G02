@@ -254,7 +254,32 @@ def get_most_concurrent_stops(analyzer):
     Obtiene las 5 paradas más concurridas
     """
     # TODO: Obtener las 5 paradas más concurridas, es decir, con más arcos salientes
-    ...
+    graph = analyzer["connections"]
+    vertex_list = G.vertices(graph)
+
+    top_stops = []
+
+    node = vertex_list["first"]
+
+    while node is not None:
+        vertex_key = node["info"]
+        outgoing_edges = G.degree(graph, vertex_key)
+
+        stop_info = {
+            "stop": vertex_key,
+            "outgoing_edges": outgoing_edges
+        }
+
+        top_stops.append(stop_info)
+
+        node = node["next"]
+
+    for i in range(len(top_stops)):
+        for j in range(i + 1, len(top_stops)):
+            if top_stops[j]["outgoing_edges"] > top_stops[i]["outgoing_edges"]:
+                top_stops[i], top_stops[j] = top_stops[j], top_stops[i]
+
+    return top_stops[:5]
 
 def get_route_between_stops_dfs(analyzer, stop1, stop2):
     """

@@ -94,6 +94,13 @@ def update_vertex_info(my_graph, key_u, new_info_u):
     
     return my_graph
 
+def get_vertex_information(my_graph, key_u):
+    vertice_u = mp.get(my_graph["vertices"], key_u)
+
+    if vertice_u is None:
+        raise Exception("El vertice no existe")
+
+    return v.get_value(vertice_u)
 
 
     

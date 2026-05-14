@@ -75,7 +75,19 @@ def option_one(cont):
 
 def option_two(cont):
     # TODO: Imprimir los resultados de la opción 2
-    ...
+    print("\nBuscando las 5 paradas más concurridas ....")
+
+    most_concurrent = logic.get_most_concurrent_stops(cont)
+
+    print("\nTop 5 paradas más concurridas:")
+    print("-" * 45)
+
+    for i in range(len(most_concurrent)):
+        stop = most_concurrent[i]["stop"]
+        outgoing_edges = most_concurrent[i]["outgoing_edges"]
+
+        print(str(i + 1) + ". Parada: " + str(stop))
+        print("   Arcos salientes: " + str(outgoing_edges))
 
 def option_three(cont):
     # TODO: Imprimir los resultados de la opción 3
