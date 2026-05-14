@@ -95,8 +95,25 @@ def option_three(cont):
 
 def option_four(cont):
     # TODO: Imprimir los resultados de la opción 4
-    ...
+    print("\nBuscando una ruta entre dos paradas usando BFS ....")
+    
+    stop_1 = input("Ingrese la primera parada (codigo): ")
+    stop_2 = input("Ingrese la segunda parada (codigo): ")
 
+    route = logic.get_route_between_stops_bfs(cont, stop_1, stop_2)
+    if route is None or len(route)==0:
+        print("No se encontró una ruta entre las paradas especificadas.")
+    else:
+        print("Ruta encontrada:")
+        for i in range(len(route)):
+            parada_actual = route[i]
+            partes = parada_actual.split("-")
+            codigo = partes[0]
+            nombre = partes[1]
+            print(str(i + 1) + ". Parada: " + str(codigo) + " (Bus: " + str(nombre) + ")")
+            
+    print("Llegada a la parada destino: " + str(len(route)-1) + " paradas.")
+        
 def option_five(cont):
     # TODO: Imprimir los resultados de la opción 5
     ...
