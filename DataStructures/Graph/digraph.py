@@ -47,3 +47,53 @@ def order(my_graph):
 
 def size(my_graph):
     return my_graph['num_edges']
+
+def degree(my_graph, key_u):
+    vertice_u = mp.get(my_graph['vertices'], key_u)
+    
+    if vertice_u is None:
+        raise Exception("El vertice no existe")
+    
+    return v.degree(vertice_u)
+
+def adjacents(my_graph, key_u):
+    vertice_u = mp.get(my_graph['vertices'], key_u)
+    
+    if vertice_u is None:
+        raise Exception("El vertice no existe")
+    
+    return v.get_adjacents(vertice_u)
+
+def vertices(my_graph):
+    return mp.key_set(my_graph['vertices'])
+
+def edges_vertex(my_graph, key_u):
+    vertice_u = mp.get(my_graph['vertices'], key_u)
+    
+    if vertice_u is None:
+        raise Exception("El vertice no existe")
+    
+    adyacentes = v.get_adjacents(vertice_u)
+    return mp.value_set(adyacentes)
+
+
+
+def get_vertex(my_graph, key_u):
+    vertice_u = mp.get(my_graph['vertices'], key_u)
+    
+    if vertice_u is None:
+        return None
+    
+    return vertice_u
+
+def update_vertex_info(my_graph, key_u, new_info_u):
+    vertice_u = mp.get(my_graph['vertices'], key_u)
+    
+    if vertice_u is not None:
+        v.set_value(vertice_u, new_info_u)
+    
+    return my_graph
+
+
+
+    
