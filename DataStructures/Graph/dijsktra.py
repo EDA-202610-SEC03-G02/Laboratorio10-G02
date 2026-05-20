@@ -4,23 +4,23 @@ from DataStructures.Priority_queue import priority_queue as pq
 from DataStructures.Stack import stack as st
 from DataStructures.Graph import digraph as g
 from DataStructures.Graph import edge as e
-
+from DataStructures.List import array_list as al
 
 def dijkstra(my_graph, source):
     
     g_order = g.order(my_graph)
     aux_structure = dijsktra_st.new_dijsktra_structure(source, g_order)
 
+    
     lista_vertices = g.vertices(my_graph)
-    nodo = lista_vertices["first"]
-    while nodo is not None:
-        vertex_key = nodo["info"]
+    for i in range(al.size(lista_vertices)):
+        vertex_key = al.get_element(lista_vertices, i)
         mp.put(aux_structure["visited"], vertex_key,
                {"dist_to": float('inf'), "edge_from": None})
-        nodo = nodo["next"]
-
+        
     mp.put(aux_structure["visited"], source,
            {"dist_to": 0, "edge_from": None})
+
 
     pq.insert(aux_structure["pq"], 0, source)
 
@@ -29,9 +29,8 @@ def dijkstra(my_graph, source):
         current_dist = dist_to(current_vertex, aux_structure)
 
         arcos = g.edges_vertex(my_graph, current_vertex)
-        nodo_arco = arcos["first"]
-        while nodo_arco is not None:
-            edge = nodo_arco["info"]
+        for i in range(al.size(arcos)):
+            edge = al.get_element(arcos, i)
             neighbor = e.to(edge)
             weight = e.weight(edge)
             new_dist = current_dist + weight
@@ -43,9 +42,7 @@ def dijkstra(my_graph, source):
                     pq.improve_priority(aux_structure["pq"], new_dist, neighbor)
                 else:
                     pq.insert(aux_structure["pq"], new_dist, neighbor)
-
-            nodo_arco = nodo_arco["next"]
-
+                    
     return aux_structure
 
 def dist_to(key_v, aux_structure):
