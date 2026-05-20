@@ -29,14 +29,13 @@ def add_edge(my_graph, key_u, key_v, weight=1.0):
         raise Exception(f"El vértice '{key_u}' no existe en el grafo")
     if vertice_v is None:
         raise Exception(f"El vértice '{key_v}' no existe en el grafo")
-    
-    arco_existente = v.get_edge(vertice_u, key_v)
-    
-    v.add_adjacent(vertice_u, key_v, weight)
-    
-    if arco_existente is None:
+
+    if v.get_edge(vertice_u, key_v) is None:
+        v.add_adjacent(vertice_u, key_v, weight)
         my_graph['num_edges'] += 1
-    
+    else:
+        v.add_adjacent(vertice_u, key_v, weight) 
+
     return my_graph
 
 def contains_vertex(my_graph, key_u):
