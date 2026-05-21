@@ -1,4 +1,5 @@
 from DataStructures.Map import map_linear_probing as mp
+from DataStructures.List import array_list as al
 from DataStructures.Stack import stack as st
 from DataStructures.Graph import digraph as G
 
@@ -20,21 +21,15 @@ def dfs_vertex(my_graph, vertex, visited_map):
     adjacents_map = G.adjacents(my_graph, vertex)
     adj_keys = mp.key_set(adjacents_map)
 
-    node = adj_keys["first"]
-
-    while node is not None:
-        adj = node["info"]
-
+    for i in range(al.size(adj_keys)):
+        adj = al.get_element(adj_keys, i)
         if not has_path_to(adj, visited_map):
             mp.put(visited_map, adj, {
                 "marked": True,
                 "edge_from": vertex
             })
-
             dfs_vertex(my_graph, adj, visited_map)
-
-        node = node["next"]
-
+            
     return visited_map
 
 
