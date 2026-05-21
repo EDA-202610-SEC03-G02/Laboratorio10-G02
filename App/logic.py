@@ -40,7 +40,6 @@ from DataStructures.Graph import dijsktra as dij
 import csv
 import time
 import os
-import folium 
 
 data_dir = os.path.dirname(os.path.realpath('__file__')) + '/Data/'
 
