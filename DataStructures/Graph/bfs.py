@@ -3,9 +3,10 @@ from DataStructures.Stack import stack as st
 from DataStructures.Map import map_linear_probing as lp
 from DataStructures.Graph import digraph as dg
 from DataStructures.List import array_list as al
+from DataStructures.Graph import edge as eli
 
 def bfs(my_graph, source):
-    mapa = lp.new_map(num_elements=dg.order(my_graph))
+    mapa = lp.new_map(num_elements=dg.order(my_graph),load_factor=0.5)
     lp.put(mapa, source, {
         'edge_to': None,
         'dist_to': 0
@@ -21,18 +22,21 @@ def bfs_vertex(my_graph, source, visited_map):
 
         info_actual = lp.get(visited_map, vertex)
         distancia_actual = info_actual['dist_to']
-        adyacentes = dg.adjacents(my_graph, vertex)
+        
+        adyacentes = dg.edges_vertex(my_graph, vertex)
         
         for i in range(al.size(adyacentes)):
             adyacente = al.get_element(adyacentes, i)
-            vecino = adyacente['to']
+            
+            vecino = eli.to(adyacente)
         
             if not lp.contains(visited_map, vecino):
-                lp.put(visited_map, vecino,{
+                lp.put(visited_map, vecino, {
                     'edge_to': vertex,
                     'dist_to': distancia_actual + 1
                 })    
                 queue.enqueue(cola, vecino)
+                
     return visited_map
 
 def has_path_to(key_v, visited_map):
